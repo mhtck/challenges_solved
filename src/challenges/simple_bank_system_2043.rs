@@ -1,13 +1,30 @@
 use std::collections::HashMap;
 
 pub fn run() {
-    let mut obj = Bank::new(vec![10, 100, 20, 50, 30]);
+    let mut obj = Bank::new(vec![0]);
 
     println!("Bank: {:#?}", obj);
 
     let ret_1: bool = obj.transfer(5, 1, 20);
 
     println!("ret_1 : {}", ret_1);
+    println!("Bank: {:#?}", obj);
+
+    let ret_2 = obj.withdraw(37, 377);
+    println!("withdraw  ===  ret_2 : {}", ret_2);
+
+    let ret_3 = obj.deposit(1, 1000000000000);
+    println!("deposit ==  ret_3 : {}", ret_3);
+    println!("Bank: {:#?}", obj);
+
+    let ret_3 = obj.transfer(1, 1, 1000000000000);
+
+    println!("transfer  ===  ret_3 : {}", ret_3);
+    println!("Bank: {:#?}", obj);
+
+    let ret_3 = obj.withdraw(1, 1000000000000);
+
+    println!("withdraw  ===  ret_3 : {}", ret_3);
     println!("Bank: {:#?}", obj);
 }
 #[derive(Debug)]
@@ -49,11 +66,29 @@ impl Bank {
         return true;
     }
 
-    fn deposit(&self, account: i32, money: i64) -> bool {
+    fn deposit(&mut self, account: i32, money: i64) -> bool {
+        if !self.accounts.contains_key(&account) {
+            return false;
+        }
+
+        let source = self.accounts.get_mut(&account).unwrap();
+        *source += money;
+
         true
     }
 
-    fn withdraw(&self, account: i32, money: i64) -> bool {
-        true
+    fn withdraw(&mut self, account: i32, money: i64) -> bool {
+        if !self.accounts.contains_key(&account) {
+            return false;
+        }
+
+        let source = self.accounts.get_mut(&account).unwrap();
+
+        if *source >= money {
+            *source -= money;
+            return true;
+        } else {
+            false
+        }
     }
 }
