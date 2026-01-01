@@ -6,6 +6,7 @@ pub mod greatst_english_letter_in_upper_and_lower_case_2309;
 //pub mod make_array_elements_equal_to_zero_3354;
 pub mod maximum_product_of_three_elements_after_one_replacement;
 pub mod merge_sorted_array_88;
+pub mod simple_bank_system_2043;
 pub mod valid_parentheses_20;
 
 use std::collections::HashMap;
@@ -20,7 +21,7 @@ pub fn run_problem_by_id(id: u32) {
         144 => binary_tree_preorder_traversal_144::run(),
         1 => find_missing_elements::run(),
         2 => maximum_product_of_three_elements_after_one_replacement::run(),
-
+        2043 => simple_bank_system_2043::run(),
         _ => println!("Problem ID {} is not implemented yet.", id),
     }
 }
@@ -35,5 +36,7 @@ pub fn list_available_challenges() -> HashMap<u32, &'static str> {
     map.insert(144, "Binary Tree Preorder Traversal");
     map.insert(1, "Find Missing Elements");
     map.insert(2, "Maximum Product of Three Elements After One Replacement");
+    map.insert(2043, "Simple Bank System");
+
     map
 }
